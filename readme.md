@@ -12,8 +12,9 @@ If you want to deploy a new service on our Kubernetes cluster, follow these step
 
 Before you can deploy your own service, you need the following things:
 
-- a [DigitalOcean token](https://www.digitalocean.com/docs/apis-clis/api/create-personal-access-token/) for for a DigitalOcean account that is part of our organzation and has write access to the Kubernetes cluster (contact [@juliuste](https://github.com/juliuste) if you're interested in deploying something)
 - a [Docker Hub Token](https://hub.docker.com/settings/security) for a docker account that has write access to our [publictransport](https://hub.docker.com/orgs/publictransport) docker organization
+- a [DigitalOcean token](https://www.digitalocean.com/docs/apis-clis/api/create-personal-access-token/) for a DigitalOcean account that is part of our organzation and has **read** access to the Kubernetes cluster (contact [@juliuste](https://github.com/juliuste) if you're interested in deploying something)
+- a *user key* and *user certificate* registered with write permissions on the Kubernetes cluster (contact [@juliuste](https://github.com/juliuste) if you're interested in deploying something)
 - for services exposed under a specific domain, that domain needs to have a `CNAME` record pointing to `antarktika.juliustens.eu`
 
 *If you want to push Docker images to your own account/organization or have your own cluster, have a look at the [advanced](#advanced) section*.
@@ -33,6 +34,8 @@ Assuming you have your service's code in some GitHub repository, and there is a 
 	- `DOCKER_USERNAME` should be your docker username
 	- `DOCKER_ACCESS_TOKEN` must be the *docker hub* token mentioned in the prerequisites
 	- `DIGITALOCEAN_ACCESS_TOKEN` must be the *DigitalOcean* token mentioned in the prerequisites
+	- `KUBERNETES_USER_KEY` must be the *user key* mentioned in the prerequisites
+	- `KUBERNETES_USER_CERTIFICATE` must be the *user certificate* mentioned in the prerequisites
 	- `DEPLOYMENT_NAME` must be the name you picked above, with which you replaced the `example-deployment` in `kubernetes.yaml` (example from above: `flixbus-api-v3`)
 
 If you did all that, your container should now be built, published as `publictransport/your-repository-name:current-commit-hash` and deployed to our cluster everytime you push to your `master` branch.
@@ -47,7 +50,12 @@ Just replace every occurance of `publictransport` in [`/.github/workflows/build-
 
 ### Different Kubernetes cluster
 
-Note that we use DigitalOcean tooling in our GitHub workflows, so you either need to replace those or make sure that your cluster is also managed by DigitalOcean. If the latter is the case, you just need to replace the string `antarktika-cluster` with your own cluster name in [`/.github/workflows/build-push-deploy.yaml`](./.github/workflows/build-push-deploy.yaml).
+Note that we use DigitalOcean tooling in our GitHub workflows, so you either need to replace those or make sure that your cluster is also managed by DigitalOcean. If the latter is the case, you need to:
+
+- setup your cluster [as described here](https://github.com/public-transport/kubernetes-setup)
+- generate a **read-only** [DigitalOcean token](https://www.digitalocean.com/docs/apis-clis/api/create-personal-access-token/) for your account
+- generate a *user key* and *user certificate* [as described here](https://github.com/public-transport/kubernetes-setup#permissions)
+- replace the string `antarktika-cluster` with your own cluster name in [`/.github/workflows/build-push-deploy.yaml`](./.github/workflows/build-push-deploy.yaml)
 
 ## Contributing
 
