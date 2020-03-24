@@ -32,6 +32,12 @@ jobs:
       with:
         args: kubernetes cluster kubeconfig show antarktika-cluster > $GITHUB_WORKSPACE/.kubeconfig
 
+    - name: Overwrite user in kubeconfig
+      env:
+        KUBERNETES_USER_KEY: ${{ secrets.KUBERNETES_USER_KEY }}
+        KUBERNETES_USER_CERTIFICATE: ${{ secrets.KUBERNETES_USER_CERTIFICATE }}
+      run: CONTEXT=$(sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config view --minify -o jsonpath='{.current-context}' --raw) && sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config set users.ci-user.client-key-data "$KUBERNETES_USER_KEY" && sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config set users.ci-user.client-certificate-data "$KUBERNETES_USER_CERTIFICATE" && sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config set contexts.$CONTEXT.user ci-user
+
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -f $GITHUB_WORKSPACE/kubernetes.yaml
 
