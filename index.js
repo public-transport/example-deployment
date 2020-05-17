@@ -16,7 +16,7 @@ const getEnv = name => {
 }
 
 api.get('*', async (req, res, next) => {
-	res.end('it works!')
+	res.end('hello! it works!')
 })
 
 const port = getEnv('PORT')

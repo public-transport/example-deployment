@@ -25,23 +25,17 @@ jobs:
     - name: Update kubernetes file
       run: TAG=$(echo $GITHUB_SHA | head -c7) && REPO=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2 -) && sed -i "s|<IMAGE>|publictransport/$REPO:$TAG|" $GITHUB_WORKSPACE/kubernetes.yaml
 
-    - name: Save DigitalOcean kubeconfig
-      uses: digitalocean/action-doctl@master
+    - name: Setup kubeconfig
       env:
-        DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      with:
-        args: kubernetes cluster kubeconfig show antarktika-cluster > $GITHUB_WORKSPACE/.kubeconfig
+        KUBERNETES_CONFIG: ${{ secrets.KUBERNETES_CONFIG }}
+      run:
+        echo $KUBERNETES_CONFIG | base64 --decode > $GITHUB_WORKSPACE/.kubeconfig
 
-    - name: Overwrite user in kubeconfig
-      env:
-        KUBERNETES_USER_KEY: ${{ secrets.KUBERNETES_USER_KEY }}
-        KUBERNETES_USER_CERTIFICATE: ${{ secrets.KUBERNETES_USER_CERTIFICATE }}
-      run: CONTEXT=$(sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config view --minify -o jsonpath='{.current-context}' --raw) && sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config set users.ci-user.client-key-data "$KUBERNETES_USER_KEY" && sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config set users.ci-user.client-certificate-data "$KUBERNETES_USER_CERTIFICATE" && sudo kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig config set contexts.$CONTEXT.user ci-user
-
-    - name: Deploy to DigitalOcean Kubernetes
+    - name: Deploy to Kubernetes
       run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -f $GITHUB_WORKSPACE/kubernetes.yaml
 
     - name: Verify deployment
       env:
         DEPLOYMENT_NAME: ${{ secrets.DEPLOYMENT_NAME }}
-      run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig rollout status "deployment/$DEPLOYMENT_NAME" --namespace user-land
+        KUBERNETES_USER: ${{ secrets.KUBERNETES_USER }}
+      run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig rollout status "deployment/$DEPLOYMENT_NAME" --namespace $KUBERNETES_USER
