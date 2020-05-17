@@ -45,10 +45,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - example-deployment.juliustens.eu
+    - example-endpoint.juliustens.eu
     secretName: example-deployment-tls
   rules:
-  - host: example-deployment.juliustens.eu
+  - host: example-endpoint.juliustens.eu
     http:
       paths:
       - backend:
