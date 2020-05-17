@@ -2,6 +2,8 @@
 
 Example deployment (including CI/CD) for our shared Kubernetes cluster.
 
+**Note that, if you deploy something on our cluster, you commit to the [code of conduct](https://github.com/public-transport/kubernetes-setup/blob/master/code-of-conduct.md).**
+
 [![License](https://img.shields.io/github/license/public-transport/example-deployment.svg?style=flat)](license)
 
 ## Manual
@@ -38,6 +40,10 @@ Assuming you have your service's code in some GitHub repository, and there is a 
 	- `DEPLOYMENT_NAME` must be the name you picked above, with which you replaced the `example-deployment` in `kubernetes.yaml` (example from above: `flixbus-api-v3`)
 
 If you did all that, your container should now be built, published as `publictransport/your-repository-name:current-commit-hash` and deployed to our cluster everytime you push to your `master` branch.
+
+### Logging
+
+You can find details on our logging setup [here](https://github.com/public-transport/kubernetes-setup#logging). **Warning: Keep in mind that logs are public for everyone who has access to the cluster, so don't log any sensitive information!**
 
 ## Advanced
 
