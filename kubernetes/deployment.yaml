@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment
+  namespace: example-user
+spec:
+  selector:
+    matchLabels:
+      app: example-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: example-deployment
+    spec:
+      containers:
+      - name: example-deployment
+        image: <IMAGE>
+        env:
+        - name: PORT
+          value: "3000"
+        ports:
+        - containerPort: 3000
