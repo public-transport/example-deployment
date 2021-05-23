@@ -25,7 +25,7 @@ Before you can deploy your own service, you need the following things:
 Assuming you have your service's code in some GitHub repository, and there is a `Dockerfile` for that service in the repository root:
 
 - copy [`/.github/workflows/build-push-deploy.yaml`](./.github/workflows/build-push-deploy.yaml) to your repository (the path must be the same in your repository, so create the `.github` and `workflow` directories if they don't exist yet)
-- copy [`/kubernetes`](./kubernetes) to your repository root and adapt all the `yaml` files in that directory as follows:
+- copy [`/.kubernetes`](./.kubernetes) to your repository root and adapt all the `yaml` files in that directory as follows:
 	- replace every occurance of the string `example-deployment` with some name that describes your service (e.g. `flixbus-api-v3`)
 	- replace every occurance of the string `example-user` with your username on our cluster (e.g. `julius`, contact [@juliuste](https://github.com/juliuste) if you're not sure what your username is)
 	- if your service **IS** exposed unter a specific domain, replace every occurance of the string `example-endpoint.juliustens.eu` with your own domain name (which, as mentioned before, needs to have a CNAME record pointing to `antarktika.juliustens.eu`)
