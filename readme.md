@@ -24,7 +24,7 @@ Before you can deploy your own service, you need the following things:
 
 Assuming you have your service's code in some GitHub repository, and there is a `Dockerfile` for that service in the repository root:
 
-- copy [`/.github/workflows/build-push-deploy.yaml`](./.github/workflows/build-push-deploy.yaml) to your repository (the path must be the same in your repository, so create the `.github` and `workflow` directories if they don't exist yet)
+- copy [`/.github/workflows/ci.yaml`](./.github/workflows/ci.yaml) to your repository (the path must be the same in your repository, so create the `.github` and `workflow` directories if they don't exist yet)
 - copy [`/.kubernetes`](./.kubernetes) to your repository root and adapt all the `yaml` files in that directory as follows:
 	- replace every occurance of the string `example-deployment` with some name that describes your service (e.g. `flixbus-api-v3`)
 	- replace every occurance of the string `example-user` with your username on our cluster (e.g. `julius`, contact [@juliuste](https://github.com/juliuste) if you're not sure what your username is)
@@ -49,7 +49,7 @@ If you operate your own cluster or want to use another Docker Hub organization/a
 
 ### Different Docker Hub account/organization
 
-Just replace every occurance of `publictransport` in [`/.github/workflows/build-push-deploy.yaml`](./.github/workflows/build-push-deploy.yaml) with your account or organization name.
+Just replace every occurance of `publictransport` in [`/.github/workflows/ci.yaml`](./.github/workflows/ci.yaml) with your account or organization name.
 
 ### Different Kubernetes cluster
 
