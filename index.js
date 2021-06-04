@@ -1,11 +1,11 @@
 'use strict'
 
-const express = require('express')
-const http = require('http')
-const compression = require('compression')
+import express from 'express'
+import { createServer } from 'http'
+import compression from 'compression'
 
 const api = express()
-const server = http.createServer(api)
+const server = createServer(api)
 
 api.use(compression())
 
