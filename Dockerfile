@@ -1,11 +1,13 @@
 # install dependencies
 FROM node:fermium-alpine
+RUN npm i -g pnpm
+
 WORKDIR /app-src
 
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 COPY index.js ./
-RUN npm install
+RUN pnpm install
 
 USER node
 
-CMD ["npm", "start"]
+CMD ["pnpm", "run", "start"]
