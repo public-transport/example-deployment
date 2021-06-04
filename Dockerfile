@@ -1,5 +1,5 @@
 # install dependencies
-FROM node:erbium-alpine
+FROM node:fermium-alpine
 WORKDIR /app-src
 
 COPY package.json package-lock.json ./
