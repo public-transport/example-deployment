@@ -41,7 +41,7 @@ If you did all that, your container should now be built, published as `publictra
 
 ### Logging
 
-You can find details on our logging setup [here](https://github.com/public-transport/kubernetes-setup#logging). **Warning: Keep in mind that logs are public for everyone who has access to the cluster, so don't log any sensitive information!**
+**Warning: Keep in mind that logs are public for everyone who has access to the cluster, so don't log any sensitive information!**
 
 ## Advanced
 
