@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: example-deployment-ingress
@@ -15,6 +15,10 @@ spec:
   - host: example-endpoint.juliustens.eu
     http:
       paths:
-      - backend:
-          serviceName: example-deployment
-          servicePort: 80
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: example-deployment
+            port:
+              number: 80
