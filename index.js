@@ -17,7 +17,7 @@ const getEnv = name => {
 
 api.get('*', async (req, res, next) => {
 	console.log('the example deployment has been called!', new Date())
-	res.end('hello! it works!')
+	res.end('hello! it works! even twice!')
 })
 
 const port = getEnv('PORT')
