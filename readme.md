@@ -8,10 +8,7 @@ Note that, by deploying something to our infrastructure, you commit to the [code
 
 ## CI configuration
 
-If you clone this repository, the CI workflow needs the following configuration to work correctly:
-
-- Add secrets `DOCKER_USERNAME` and `DOCKER_ACCESS_TOKEN` in your repo's settings containing your docker hub credentials
-- If you want to deploy to your own docker namespace, replace `publictransport/` with your own docker username/org in `.github/workflows/ci.yaml`
+The GitHub Actions workflow publishes container images to [GitHub's container registry](https://ghcr.io) by default, so you can just copy the workflow file to your own repository and things should work out of the box.
 
 ## Contributing
 
