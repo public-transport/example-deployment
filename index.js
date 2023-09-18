@@ -1,5 +1,3 @@
-'use strict'
-
 import express from 'express'
 import { createServer } from 'http'
 import compression from 'compression'
