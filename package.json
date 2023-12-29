@@ -1,34 +1,30 @@
 {
-	"name": "example-deployment",
-	"version": "0.0.0",
-	"private": true,
-	"description": "Example deployment (including CI/CD) for our shared DigitalOcean Kubernetes cluster.",
-	"homepage": "https://github.com/public-transport/example-deployment",
-	"bugs": "https://github.com/public-transport/example-deployment/issues",
-	"repository": "public-transport/example-deployment",
-	"license": "ISC",
-	"author": "Julius Tens <mail@juliustens.eu>",
-	"scripts": {
-		"check-deps": "depcheck",
-		"fix": "npm run lint -- --fix",
-		"lint": "eslint index.js",
-		"start": "node index.js",
-		"test": "npm run lint && npm run check-deps"
-	},
-	"dependencies": {
-		"compression": "^1.7.4",
-		"express": "^4.18.2"
-	},
-	"devDependencies": {
-		"depcheck": "^1.4.7",
-		"eslint": "^8.56.0",
-		"eslint-config-standard": "^17.1.0",
-		"eslint-plugin-import": "^2.29.1",
-		"eslint-plugin-n": "^16.6.0",
-		"eslint-plugin-promise": "^6.1.1"
-	},
-	"engines": {
-		"node": ">=20"
-	},
-	"type": "module"
+  "name": "example-deployment",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Example deployment (including CI/CD) for our shared DigitalOcean Kubernetes cluster.",
+  "homepage": "https://github.com/public-transport/example-deployment",
+  "bugs": "https://github.com/public-transport/example-deployment/issues",
+  "repository": "public-transport/example-deployment",
+  "license": "ISC",
+  "author": "Julius Tens <mail@juliustens.eu>",
+  "scripts": {
+    "check-deps": "depcheck",
+    "fix": "npm run lint -- --fix",
+    "lint": "standard",
+    "start": "node index.js",
+    "test": "npm run lint && npm run check-deps"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "depcheck": "^1.4.7",
+    "standard": "^17.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module"
 }
