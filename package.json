@@ -9,22 +9,34 @@
   "license": "ISC",
   "author": "Julius Tens <mail@juliustens.eu>",
   "scripts": {
-    "check-deps": "depcheck",
+    "build": "tsc",
+    "check-deps": "depcheck --ignores='ts-node'",
     "fix": "npm run lint -- --fix",
-    "lint": "standard",
-    "start": "node index.js",
-    "test": "npm run lint && npm run check-deps"
+    "lint": "ts-standard src",
+    "dev": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
+    "start": "node dist/index.js",
+    "test": "npm run lint && npm run check-deps && npm run build"
   },
   "dependencies": {
     "compression": "^1.7.4",
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@types/compression": "^1.7.5",
+    "@types/express": "^4.17.21",
+    "@types/node": "20",
     "depcheck": "^1.4.7",
-    "standard": "^17.1.0"
+    "ts-node": "^10.9.2",
+    "ts-standard": "^12.0.2",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=20"
   },
-  "type": "module"
+  "type": "module",
+  "ts-standard": {
+    "ignore": [
+      "dist"
+    ]
+  }
 }

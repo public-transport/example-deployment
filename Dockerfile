@@ -4,8 +4,11 @@ RUN npm i -g pnpm
 WORKDIR /app-src
 
 COPY package.json pnpm-lock.yaml ./
-COPY index.js ./
 RUN pnpm install
+
+COPY tsconfig.json ./
+COPY src ./src
+RUN pnpm run build
 
 USER node
 
